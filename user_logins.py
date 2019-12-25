@@ -7,10 +7,8 @@ logins = {
 }
 
 def is_valid_credentials(username: str, password: str) -> bool:
-	return username in logins and logins[username] == password 
-
-def hash_password(password: str) -> str:
-	return hashlib.sha256(password.encode()).hexdigest()
+	hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+	return username in logins and logins[username] == hashed_pw 
 
 
 if __name__ == "__main__":
@@ -18,9 +16,7 @@ if __name__ == "__main__":
 	username = str(input("Username: "))
 	password = str(input("Password: "))
 
-	hashed_pw = hash_password(password)
-
-	if is_valid_credentials(username, hashed_pw):
+	if is_valid_credentials(username, password):
 		print("\nmy deepest, darkest secret\n")
 	else:
 		print("\nget lost\n")
