@@ -8,7 +8,7 @@ logins = {
 }
 
 def is_valid_credentials(username: str, password: str):
-	return logins[username] == password
+	return username in logins and logins[username] == password
 		
 
 if __name__ == "__main__":
