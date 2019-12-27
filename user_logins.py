@@ -1,3 +1,4 @@
+from getpass import getpass
 import hashlib
 import json
 
@@ -12,9 +13,9 @@ def is_valid_credentials(username: str, password: str) -> bool:
 if __name__ == "__main__":
 	print("\nWelcome! Please sign in:")
 	username = str(input("Username: "))
-	password = str(input("Password: "))
+	password = getpass()
 
 	if is_valid_credentials(username, password):
-		print("\nmy deepest, darkest secret\n")
+		print("\nMy deepest, darkest secret\n")
 	else:
-		print("\nget lost\n")
+		print("\nGet lost\n")
