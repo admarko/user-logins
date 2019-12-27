@@ -20,7 +20,7 @@ try:
         c.execute('SELECT name from sqlite_master where type= "table"')
         tables = [table[0] for table in c.fetchall()]
         print(
-            "\nThe database already exists, with the following table{}: ".format(
+            "\nThe database already exists, with the following table{}: ".format(  # noqa
                 "s" if len(tables) > 1 else ""
             )
         )
@@ -31,10 +31,12 @@ try:
             print("-{} ({} rows)".format(table.capitalize(), num_rows))
 
         response = str(
-            input("\nWould you like to delete it and create a new one (y/n)? ")
+            input("\nWould you like to delete it and create a new one [y/n]? ")
         ).lower()
         while response != "y" and response != "n":
-            response = str(input("Please respond with a (y)es or a (n)o: ")).lower()
+            response = str(
+                input("Please respond with a [y]es or a [n]o: ")
+            ).lower()  # noqa
 
         if response == "n":
             exit()
