@@ -1,14 +1,18 @@
 from getpass import getpass
 import hashlib
-import json
+import sqlite3
 
-with open("credentials.json", "r") as creds:
-    LOGINS = json.load(creds)
+from settings import DATABASE
 
 
-def is_valid_credentials(username: str, password: str) -> bool:
+def is_valid_credentials(username: str, password: str, conn) -> bool:
     hashed_pw = hashlib.sha256(password.encode()).hexdigest()
-    return username in LOGINS and LOGINS[username] == hashed_pw
+    c = conn.cursor()
+    c.execute(
+        "SELECT EXISTS(SELECT 1 FROM users WHERE username = ? AND password_hash = ?)",  # noqa
+        (username, hashed_pw),
+    )
+    return bool(c.fetchone()[0])
 
 
 if __name__ == "__main__":
@@ -16,7 +20,9 @@ if __name__ == "__main__":
     username = str(input("Username: "))
     password = getpass()
 
-    if is_valid_credentials(username, password):
+    conn = sqlite3.connect(DATABASE)
+
+    if is_valid_credentials(username, password, conn):
         print("\nMy deepest, darkest secret\n")
     else:
         print("\nGet lost\n")
