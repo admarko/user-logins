@@ -1,3 +1,6 @@
-# Robert Heaton's PPFAB 6: User Logins
+# User Authentication System
 
-https://robertheaton.com/2019/08/12/programming-projects-for-advanced-beginners-user-logins/
+Followed from: https://robertheaton.com/2019/08/12/programming-projects-for-advanced-beginners-user-logins/
+
+
+Used DB Browser for SQLite for visual aid

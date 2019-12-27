@@ -1,5 +1,6 @@
 from getpass import getpass
 import hashlib
+import sqlite3
 
 from settings import DATABASE
 
@@ -12,6 +13,7 @@ hashed_pw = hashlib.sha256(password.encode()).hexdigest()
 
 conn = sqlite3.connect(DATABASE)
 c = conn.cursor()
-c.execute('''INSERT INTO users
-             VALUES(username, password_hash )''')
-c.commit() # check this
+params = (username, hashed_pw)
+c.execute("INSERT INTO users VALUES(?, ?)", params)
+
+conn.commit()
